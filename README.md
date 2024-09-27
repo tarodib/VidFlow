@@ -1,3 +1,3 @@
 # VidFlow
-SOME TEXT HERE GUYS! \\
-Ápdét
+SOME TEXT HERE GUYS!
+/Ápdét
