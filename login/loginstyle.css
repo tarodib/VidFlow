@@ -1,0 +1,140 @@
+body{
+    background-image: url("/vidflow/vidflow_background1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+    height: auto;
+    margin-top: 140px;
+    margin-bottom: 30px;
+}
+
+.logindiv{
+    background-color: #c0c0c0;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 60px;
+    width: 25%;
+    padding-top: 30px;
+}
+
+.field{
+    padding: 10px;
+    width: 350px;
+    background-color: #e6e6e6;
+    border-radius: 30px;
+    text-align: center;
+    border: 2px solid #949494;
+    font-size: 17px;
+}
+
+.label{
+    font-family: "Jersey 15";
+    font-size: 20px;
+}
+
+.login{
+    padding: 15px;
+    background-color: #505050;
+    cursor: pointer;
+    border-radius: 15px;
+    color: white;
+    font-family: "Jersey 15";
+    font-size: 25px;
+}
+
+.login:hover{
+    border:3px solid black;
+}
+
+#forgetpass{
+    text-decoration: underline;
+    float: left;
+    font-family: "Inder";
+    font-size: 15px;
+    color: black;
+}
+
+#forgetpass:hover{
+    color: #ff776e;
+}
+
+#noaccount{
+    float: right;
+    text-decoration: underline;
+    font-family: "Inder";
+    font-size: 15px;
+    color: black;
+}
+
+#noaccount:hover{
+    color: #ff776e;
+}
+
+#barnatechlogin{
+    padding: 10px;
+    background-color: #e6e6e6;
+    text-align: center;
+    border: 2px solid #949494;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    color: #7a7a7a;
+    font-family: "Jersey 15";
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+#barnatechlogin:hover{
+    border: 2px solid black;
+}
+
+#googlelogin{
+    padding: 10px;
+    background-color: #e6e6e6;
+    text-align: center;
+    border: 2px solid #949494;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    color: #7a7a7a;
+    font-family: "Jersey 15";
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+#googlelogin:hover{
+    border: 2px solid black;
+}
+
+#registerbutton{
+    text-decoration: none;
+    font-family: "Jersey 15";
+    color: white;
+    font-size: 25px;
+    background-color: #de0f00;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border: 2px solid #700901;
+    cursor: pointer;
+    border-radius: 10px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+#registerbutton:hover{
+    border-color: #5c0602;
+}
