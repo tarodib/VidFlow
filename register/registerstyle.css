@@ -1,0 +1,33 @@
+body{
+    /* The image used */
+  background-image: url("/vidflow/vidflow_background1.jpg");
+  background-size: cover;  /* This ensures the image covers the entire background */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-position: center;  /* Centers the image */
+    height: 100vh;  /* Sets the height to fill the viewport */
+    margin: 0;  /* Removes default margin */
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+    height: auto;
+    margin-top: 150px;
+    margin-bottom: 30px;
+}
+
+.registration{
+    background-color: #c0c0c0;
+    border-radius: 20px;
+    text-align: center;
+    padding: 100px;
+}
+
+.field{
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color: #f7f5ed;
+    width: 300px;
+    padding: 10px;
+}
