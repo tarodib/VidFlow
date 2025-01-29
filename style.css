@@ -1,0 +1,160 @@
+body{
+    background-color: #E3E1E1;
+}
+
+.headerelements{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#menuicon{
+    margin-left: 2%;
+    width: 2.6%;
+    height: auto;
+}
+
+#officiallogo{
+    margin-left: 2.5%;
+    width: 15%;
+    height: auto;
+}
+
+#searchpart {
+    margin-left: 10%;
+    display: inline-block;
+}
+
+#searchbar {
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 12px;
+    background-color: #C9C7C7;
+    margin-top: 1.5%;
+    width: 600px;
+    font-family: "Inder";
+    text-align: center;
+}
+
+#search {
+    height: 42px;
+    border-radius: 12px;
+    border: 2px solid black;
+    background-color: #C9C7C7;
+    margin-left: 10px;
+    font-family: "Inder";
+    cursor: pointer;
+}
+
+#userprofilepic{
+    width: 45px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+#profileusername{
+    margin-right: 15px;
+    font-family: "Inder";
+}
+
+#logout{
+    width: 30px;
+    height: auto;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    float: right;
+}
+
+#logouticon{
+    width: 30px;
+}
+
+#usercontrol{
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 750px) {
+    body {
+        background-color: #E3E1E1;
+    }
+
+    .headerelements {
+        display: inline-block;
+        text-align: center;
+    }
+
+    #menuicon {
+        margin-left: 2%;
+        width: 7%; /* Smaller size for mobile */
+        height: auto;
+    }
+
+    #officiallogo {
+        margin-left: 2.5%;
+        width: 35%; /* Reduce logo size */
+        height: auto;
+    }
+
+    #searchpart {
+        margin-left: 0; /* Center the search part */
+        display: inline-block;
+        width: 90%; /* Fit within screen */
+        text-align: center;
+    }
+
+    #searchbar {
+        height: 30px; /* Slightly smaller height */
+        border: 2px solid black;
+        border-radius: 12px;
+        background-color: #C9C7C7;
+        margin-top: 2%;
+        width: 70%; /* Reduce width for mobile */
+        font-family: "Inder";
+        text-align: center;
+    }
+
+    #search {
+        height: 35px; /* Adjust button size */
+        border-radius: 12px;
+        border: 2px solid black;
+        background-color: #C9C7C7;
+        margin-left: 5px;
+        font-family: "Inder";
+    }
+
+    #userprofilepic {
+        width: 35px; /* Smaller profile picture */
+        height: auto;
+        border-radius: 10px;
+    }
+
+    #profileusername {
+        font-size: 14px; /* Reduce font size */
+        margin-right: 10px;
+        font-family: "Inder";
+    }
+
+    #logout {
+        width: 25px; /* Smaller logout button */
+        height: auto;
+        border: none;
+        margin-top: 0;
+        padding: 0;
+        background: none;
+        cursor: pointer;
+    }
+
+    #logouticon {
+        width: 25px; /* Adjust icon size */
+    }
+
+    #usercontrol {
+        float: right; 
+        margin-right: 10px; /* Adjust spacing for mobile */
+    }
+}
