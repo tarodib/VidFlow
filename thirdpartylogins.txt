@@ -1,0 +1,5 @@
+Third-party login to VidFlow from BarnaTech:
+
+--------------------------------------------
+Needed data to transmit from BarnaTech:
+username, name, profilepic

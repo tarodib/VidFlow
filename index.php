@@ -1,7 +1,21 @@
 <?php
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
 session_start();
+$searchURI = $_SERVER["REQUEST_URI"];
 if(!isset($_SESSION["username_in"])){
     header("Location: login");
+}
+if(isset($_POST["search"])){
+    $searchbarValue = "?search=" . $_POST["searchbar"] . "";
+    header("Location: ".$searchbarValue);
+    exit;
+}
+
+if(isset($_POST["logout"])){
+    session_destroy();
+    header("Location: /login");
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +24,8 @@ if(!isset($_SESSION["username_in"])){
 <meta name="viewport" content="width=device-width">
 <title>VidFlow - Főoldal</title>
 <link rel="icon" href="webicon.ico"/>
-<link rel="stylesheet" href="style.css?v=1.3"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css?v=1.5"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inder&family=Itim&display=swap" rel="stylesheet">
@@ -19,11 +34,6 @@ if(!isset($_SESSION["username_in"])){
 <div class="header">
 <img src="pageelements/menu_icon.png" id="menuicon" class="headerelements"/>
 <img src="vidflow_official_logo.png" id="officiallogo" class="headerelements" onclick="goHomePage()">
-<!--<h4>Üdvözlünk, <?php echo($_SESSION['username_in']); ?></h4>
-<form method="POST">
-<input id="logout" name="logout" type="submit" value="Kilépés"/>
-</form>
-<br>-->
 <div id="searchpart">
 <form method="POST">
 <input type="text" name="searchbar" id="searchbar" placeholder="Itt tudsz keresni"/>
@@ -46,62 +56,208 @@ if(isset($_SESSION['userplan_status'])){
 </div>
 </div>
 </div>
-<!-- Download test code -->
-<div class="download-section">
-    <h2>Download Video</h2>
-    <form id="downloadForm">
-        <input type="text" id="videoUrl" placeholder="Enter video URL" required />
-        <button type="submit">Download</button>
-    </form>
-    <div id="downloadStatus"></div>
+<br>
+<div class="container mt-4">
+  <div class="row">
+  <?php
+    function searchInProgress($searchURI){
+        $splitURI = explode("?search=", $searchURI);
+        $searchTerm = $splitURI[1];
+
+    function fetchYouTubeResults($searchTerm, $resultsPerBatch = 5) {
+        $apiKey = 'AIzaSyCUtocPhyhUfi-KMJ56ya3r46HoOf79VhE'; // Replace with your YouTube Data API key
+
+        // Step 1: Perform a search query to get video IDs
+        $searchUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=" . $searchTerm . "&maxResults={$resultsPerBatch}&key={$apiKey}";
+        $searchResponse = file_get_contents($searchUrl);
+
+        if ($searchResponse === false) {
+            return []; // Return an empty array if the search request fails
+        }
+
+        $searchData = json_decode($searchResponse, true);
+
+        // Extract video IDs from the search results
+        $videoIds = [];
+        foreach ($searchData['items'] as $item) {
+            $videoIds[] = $item['id']['videoId'];
+        }
+
+        if (empty($videoIds)) {
+            return []; // Return an empty array if no videos were found
+        }
+
+        // Step 2: Fetch video details (including duration) for all video IDs in one request
+        $videoDetailsUrl = "https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=" . implode(',', $videoIds) . "&key={$apiKey}";
+        $detailsResponse = file_get_contents($videoDetailsUrl);
+
+        if ($detailsResponse === false) {
+            return []; // Return an empty array if the details request fails
+        }
+
+        $detailsData = json_decode($detailsResponse, true);
+
+        // Parse video details into a structured array
+        $videos = [];
+        foreach ($detailsData['items'] as $item) {
+            $durationIso8601 = $item['contentDetails']['duration'];
+            $videos[] = [
+                'id' => $item['id'],
+                'title' => $item['snippet']['title'],
+                'duration' => formatDuration($durationIso8601),
+                'uploader' => $item['snippet']['channelTitle'],
+                'thumbnail' => $item['snippet']['thumbnails']['medium']['url'],
+                'uploader_url' => "https://www.youtube.com/channel/" . $item['snippet']['channelId'],
+            ];
+        }
+
+        return $videos;
+    }
+
+    function formatDuration($duration) {
+        // Convert ISO 8601 duration (e.g., PT1H2M10S) into human-readable format (e.g., 1:02:10)
+        try {
+            $interval = new DateInterval($duration);
+            return ($interval->h > 0 ? $interval->h . ':' : '') .
+                   str_pad($interval->i, 2, '0', STR_PAD_LEFT) . ':' .
+                   str_pad($interval->s, 2, '0', STR_PAD_LEFT);
+        } catch (Exception $e) {
+            return 'Unknown'; // Return 'Unknown' if parsing fails
+        }
+    }
+
+    // Fetch search results
+    $resultsPerBatch = 10; // Number of results to display per batch
+    $videos = fetchYouTubeResults($searchTerm, $resultsPerBatch);
+
+    // Display search results in a vertical YouTube-like style
+    if (!empty($videos)) { ?>
+        <div class="container mt-4">
+            <?php foreach ($videos as $video): ?>
+                <div class="row mb-3"><a style="text-decoration: none; color: #7a0202;" href="/watch?id=<?= htmlspecialchars($video['id']) ?>">
+                    <div class="col-md-4">
+                        <!-- Video Thumbnail -->
+                            <img class="rounded video-thumbnail" src="<?= htmlspecialchars($video['thumbnail']) ?>" alt="<?= htmlspecialchars($video['title']) ?>">
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Video Title -->
+                        <h5 class="video-name"><?= htmlspecialchars($video['title']) ?></h5>
+                        <!-- Uploader Name -->
+                        <p class="text-muted mb-1 video-uploader-name">By <a href="<?= htmlspecialchars($video['uploader_url']) ?>" target="_blank" style="text-decoration: none;"><?= htmlspecialchars($video['uploader']) ?></a></p>
+                        <!-- Video Duration -->
+                        <p class="text-muted">Időtartam: <?= htmlspecialchars($video['duration']) ?></p>
+                    </div>
+                    </a>
+                </div>
+                <hr>
+            <?php endforeach; ?>
+        </div>
+    <?php } else {
+        echo "<p>No results found for your search.</p>";
+    }
+}
+
+    
+    function convertYouTubeDuration($duration)
+    {
+        try {
+            $interval = new DateInterval($duration);
+            return ($interval->h * 60) + $interval->i + round($interval->s / 60, 2);
+        } catch (Exception $e) {
+            return 'Ismeretlen';
+        }
+    }
+    
+    if (str_contains($searchURI, "?search=")) {
+        searchInProgress($searchURI);
+    } else {
+    $allVideoData = [];
+    // YouTube API URL to fetch trending videos
+    $trendingVideosUrl = "https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode=HU&key=AIzaSyCeoOEm4iaj18D6YeFI6yMhfUQ0uuFAuNY&maxResults=20";
+    $getTrendingVideos = file_get_contents($trendingVideosUrl);
+    if ($getTrendingVideos === false) {
+        die("Hiba történt a YouTube API meghívásakor!");
+    }
+    $trendingVideos = json_decode($getTrendingVideos, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        die('Hiba történt a JSON dekódolásakor: ' . json_last_error_msg());
+    }
+    foreach ($trendingVideos['items'] as $video) {
+        $videoId = $video['id'];
+        $snippet = $video['snippet'];
+        $contentDetails = $video['contentDetails'];
+
+        // Fetch uploader's channel details to get profile picture
+        $channelId = $snippet['channelId'];
+        $channelDetailsUrl = "https://www.googleapis.com/youtube/v3/channels?part=snippet&id=$channelId&key=AIzaSyCeoOEm4iaj18D6YeFI6yMhfUQ0uuFAuNY";
+        $channelResponse = file_get_contents($channelDetailsUrl);
+
+        if ($channelResponse === false) {
+            die('Hiba történt a csatorna adatok lekérésekor.');
+        }
+
+        $channelData = json_decode($channelResponse, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            die('Hiba történt a csatorna JSON dekódolásakor: ' . json_last_error_msg());
+        }
+
+        // Get uploader avatar URL
+        $uploaderAvatar = $channelData['items'][0]['snippet']['thumbnails']['default']['url'] ?? '';
+
+        // Collect video metadata
+        $allVideoData[] = [
+            'id' => $videoId,
+            'title' => $snippet['title'] ?? 'Ismeretlen cím',
+            'uploader' => $snippet['channelTitle'] ?? 'Ismeretlen feltöltő',
+            'thumbnail' => $snippet['thumbnails']['medium']['url'] ?? '',
+            'length_minutes' => isset($contentDetails['duration'])
+                ? convertYouTubeDuration($contentDetails['duration'])
+                : 'Ismeretlen időtartam',
+            'uploader_avatar' => $uploaderAvatar
+        ];
+    }
+
+    // Function to convert ISO 8601 duration to minutes
+    
+    foreach ($allVideoData as $videometadata): ?>
+      <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card"><a style="text-decoration: none; color: #7a0202;" href="/watch?id=<?= htmlspecialchars($videometadata['id']) ?>">
+              <div class="ratio ratio-16x9">
+                  <!-- Thumbnail -->
+                  <img class="card-img-top video-thumbnail" src="<?= htmlspecialchars($videometadata['thumbnail']) ?>" alt="<?= htmlspecialchars($videometadata['title']) ?>">
+              </div>
+              <div class="card-body">
+                  <!-- Video Title -->
+                  <h6 class="video-name"><?= htmlspecialchars($videometadata['title']) ?></h6>
+                  <!-- Uploader Details -->
+                  <p class="video-details">
+                      <img class="video-uploader-pic" src="<?= htmlspecialchars($videometadata['uploader_avatar']) ?>" alt="<?= htmlspecialchars($videometadata['uploader']) ?>">
+                      <span class="video-uploader-name"><?= htmlspecialchars($videometadata['uploader']) ?></span>
+                  </p>
+              </div>
+          </a></div>
+      </div>
+    <?php endforeach;
+    }
+    ?>
+  </div>
 </div>
 </body>
 <script src="script.js"></script>
 <script>
-/*Test code*/
-document.getElementById("downloadForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const videoUrl = document.getElementById("videoUrl").value;
-    const statusDiv = document.getElementById("downloadStatus");
-
-    if (!videoUrl) {
-        statusDiv.textContent = "Please enter a video URL.";
-        return;
-    }
-
-    statusDiv.textContent = "Downloading...";
-
-    try {
-        const response = await fetch("download.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ url: videoUrl })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            statusDiv.innerHTML = `
-                Download complete! <a href="downloads/${result.file}" download>Click here to download</a>
-            `;
-        } else {
-            statusDiv.textContent = `Error: ${result.error}`;
-        }
-    } catch (error) {
-        statusDiv.textContent = `Failed to download video: ${error.message}`;
-    }
-/*end test code*/
 document.body.style.backgroundColor = "<?php echo htmlspecialchars($_SESSION['bkgColor']); ?>";
 document.body.style.fontFamily = "<?php echo htmlspecialchars($_SESSION['fontFamily']); ?>";
 searchbar.style.fontFamily = "<?php echo htmlspecialchars($_SESSION['fontFamily']); ?>";
 profileusername.style.fontFamily = "<?php echo htmlspecialchars($_SESSION['fontFamily']); ?>";
+var videobordercolor1 = "<?php echo htmlspecialchars($_SESSION['firstvideoborderColor']); ?>";
+var videobordercolor2 = "<?php echo htmlspecialchars($_SESSION['secondvideoborderColor']); ?>";
+const cards = document.querySelectorAll('.card');
+cards.forEach(card => {
+  card.style.backgroundColor = "<?php echo htmlspecialchars($_SESSION['bkgColor']); ?>";
+});
+const videothumbnails = document.querySelectorAll('.video-thumbnail');
+videothumbnails.forEach(videothumbnail => {
+    videothumbnail.style.background = "linear-gradient(to bottom,"+videobordercolor1+","+videobordercolor2+") border-box, white padding-box";
+});
 </script>
 </html>
-
-<?php
-if(isset($_POST["logout"])){
-    session_destroy();
-    header("Location: login");
-}
-?>
