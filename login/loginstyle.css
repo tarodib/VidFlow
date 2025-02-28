@@ -1,15 +1,13 @@
-/* Alap stílusok (webes verzió) */
-body {
-    background-image: url("../vidflow_background1.jpg");
+body{
+    background-image: url("/vidflow/vidflow_background1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
-    font-family: "Inder", sans-serif;
 }
 
-.logo {
+.logo{
     display: block;
     margin: 0 auto;
     width: 250px;
@@ -18,7 +16,7 @@ body {
     margin-bottom: 30px;
 }
 
-.logindiv {
+.logindiv{
     background-color: #c0c0c0;
     border-radius: 20px;
     text-align: center;
@@ -28,7 +26,7 @@ body {
     padding-top: 30px;
 }
 
-.field {
+.field{
     padding: 10px;
     width: 350px;
     background-color: #e6e6e6;
@@ -38,228 +36,105 @@ body {
     font-size: 17px;
 }
 
-.label {
-    font-family: "Jersey 15", sans-serif;
+.label{
+    font-family: "Jersey 15";
     font-size: 20px;
 }
 
-.login {
+.login{
     padding: 15px;
     background-color: #505050;
     cursor: pointer;
     border-radius: 15px;
     color: white;
-    font-family: "Jersey 15", sans-serif;
+    font-family: "Jersey 15";
     font-size: 25px;
 }
 
-#forgetpass, #noaccount {
+.login:hover{
+    border:3px solid black;
+}
+
+#forgetpass{
     text-decoration: underline;
-    font-family: "Inder", sans-serif;
+    float: left;
+    font-family: "Inder";
     font-size: 15px;
     color: black;
 }
 
-#forgetpass {
-    float: left;
+#forgetpass:hover{
+    color: #ff776e;
 }
 
-#noaccount {
+#noaccount{
     float: right;
+    text-decoration: underline;
+    font-family: "Inder";
+    font-size: 15px;
+    color: black;
 }
 
-#barnatechlogin, #googlelogin {
+#noaccount:hover{
+    color: #ff776e;
+}
+
+#barnatechlogin{
     padding: 10px;
     background-color: #e6e6e6;
     text-align: center;
     border: 2px solid #949494;
     border-radius: 10px;
+    align-items: center;
     cursor: pointer;
     color: #7a7a7a;
-    font-family: "Jersey 15", sans-serif;
+    font-family: "Jersey 15";
     font-size: 20px;
     font-weight: lighter;
 }
 
-#registerbutton {
+#barnatechlogin:hover{
+    border: 2px solid black;
+}
+
+#googlelogin{
+    padding: 10px;
+    background-color: #e6e6e6;
+    text-align: center;
+    border: 2px solid #949494;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    color: #7a7a7a;
+    font-family: "Jersey 15";
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+#googlelogin:hover{
+    border: 2px solid black;
+}
+
+#registerbutton{
     text-decoration: none;
-    font-family: "Jersey 15", sans-serif;
+    font-family: "Jersey 15";
     color: white;
     font-size: 25px;
     background-color: #de0f00;
-    padding: 15px 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+    padding-top: 15px;
     border: 2px solid #700901;
     cursor: pointer;
     border-radius: 10px;
+    right: 0;
+    top: 0;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
-/* Mobil verzió (reszponzív) */
-@media screen and (max-width: 768px) {
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .logo {
-        width: 80%;
-        max-width: 200px;
-        margin-top: 60px;
-        margin-bottom: 20px;
-    }
-
-    .logindiv {
-        width: 90%;
-        padding: 20px;
-        max-width: 350px;
-    }
-
-    .field {
-        width: 90%;
-        max-width: 300px;
-        font-size: 14px;
-    }
-
-    .label {
-        font-size: 16px;
-    }
-
-    .login {
-        font-size: 18px;
-        padding: 10px;
-        width: 90%;
-        max-width: 200px;
-    }
-
-    #forgetpass, #noaccount {
-        font-size: 12px;
-        display: inline-block;
-        float: none;
-        margin: 10px 5px;
-    }
-
-    #barnatechlogin, #googlelogin {
-        font-size: 16px;
-        width: 90%;
-        max-width: 250px;
-        margin: 10px auto;
-        display: block;
-    }
-
-    #registerbutton {
-        font-size: 16px;
-        padding: 10px 15px;
-        right: 10px;
-        top: 10px;
-    }
-}
-
-/* Még kisebb képernyőkre */
-@media screen and (max-width: 480px) {
-    .logindiv {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .field {
-        font-size: 12px;
-    }
-
-    .label {
-        font-size: 14px;
-    }
-
-    .login {
-        font-size: 16px;
-    }
-
-    #registerbutton {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-}
-
-/* Még kisebb képernyőkre */
-@media screen and (max-width: 480px) {
-    .logindiv {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .field {
-        font-size: 12px;
-    }
-
-    .label {
-        font-size: 14px;
-    }
-
-    .login {
-        font-size: 16px;
-    }
-
-    #registerbutton {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-}
-
-/* Még kisebb képernyőkre (pl. 6,1 inches iPhone) */
-@media screen and (max-width: 390px) {
-    .logo {
-        width: 70%;
-        max-width: 180px;
-        margin-top: 40px;
-        margin-bottom: 15px;
-    }
-
-    .logindiv {
-        width: 95%;
-        padding: 12px;
-        border-radius: 15px;
-    }
-
-    .field {
-        width: 95%;
-        max-width: 280px;
-        font-size: 12px;
-        padding: 8px;
-        border-radius: 20px;
-    }
-
-    .label {
-        font-size: 13px;
-    }
-
-    .login {
-        font-size: 14px;
-        padding: 8px;
-        width: 95%;
-        max-width: 180px;
-        border-radius: 12px;
-    }
-
-    #forgetpass, #noaccount {
-        font-size: 11px;
-        margin: 8px 3px;
-    }
-
-    #barnatechlogin, #googlelogin {
-        font-size: 14px;
-        width: 95%;
-        max-width: 230px;
-        padding: 8px;
-        border-radius: 8px;
-    }
-
-    #registerbutton {
-        font-size: 12px;
-        padding: 6px 10px;
-        right: 5px;
-        top: 5px;
-        border-radius: 8px;
-    }
+#registerbutton:hover{
+    border-color: #5c0602;
 }

@@ -1,10 +1,11 @@
 body{
-    background-image: url("../vidflow_background1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
-    margin: 0;
+    /* The image used */
+  background-image: url("/vidflow/vidflow_background1.jpg");
+  background-size: cover;  /* This ensures the image covers the entire background */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-position: center;  /* Centers the image */
+    height: 100vh;  /* Sets the height to fill the viewport */
+    margin: 0;  /* Removes default margin */
 }
 
 .logo{
@@ -12,118 +13,21 @@ body{
     margin: 0 auto;
     width: 250px;
     height: auto;
-    margin-top: 110px;
-    margin-bottom: 40px;
+    margin-top: 150px;
+    margin-bottom: 30px;
 }
 
 .registration{
     background-color: #c0c0c0;
     border-radius: 20px;
     text-align: center;
-    margin: 0 auto;
-    padding-right: 60px;
-    padding-left: 60px;
-    width: 30%;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 100px;
 }
-
 
 .field{
     border-radius: 20px;
     border: 2px solid black;
-    background-color: #e6e6e6;
-    width: 80%;
+    background-color: #f7f5ed;
+    width: 300px;
     padding: 10px;
-    text-align: center;
-}
-
-label{
-    font-family: "Jersey 15";
-    font-size: 20px;
-}
-
-.register{
-    padding: 15px;
-    background-color: #505050;
-    cursor: pointer;
-    border-radius: 15px;
-    color: white;
-    font-family: "Jersey 15";
-    font-size: 25px;
-}
-
-.register:hover{
-    border:3px solid black;
-}
-
-#existingacc{
-    text-decoration: underline;
-    font-family: "Inder";
-    font-size: 15px;
-    color: black;
-}
-
-#accquestion{
-    font-family: "Inder";
-    font-size: 15px;
-    color: black;
-}
-
-#loginbutton{
-    text-decoration: none;
-    font-family: "Jersey 15";
-    color: white;
-    font-size: 25px;
-    background-color: #de0f00;
-    padding-right: 25px;
-    padding-left: 25px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    border: 2px solid #700901;
-    cursor: pointer;
-    border-radius: 10px;
-    right: 0;
-    top: 0;
-    position: absolute;
-    margin-right: 20px;
-    margin-top: 20px;
-}
-
-@media only screen and (max-width: 1220px) and (max-height: 2712px) and (-webkit-device-pixel-ratio: 3) {
-    .logo {
-        width: 180px;
-        margin-top: 35px;
-    }
-
-    .registration {
-        width: 85%;
-        padding: 25px;
-        max-width: 350px;
-    }
-
-    .field {
-        font-size: 14px;
-        padding: 12px;
-    }
-
-    label {
-        font-size: 16px;
-    }
-
-    .register {
-        font-size: 18px;
-        padding: 12px 18px;
-    }
-
-    #loginbutton {
-        font-size: 16px;
-        padding: 8px 12px;
-        right: 15px;
-        top: 15px;
-    }
-
-    #existingacc, #accquestion {
-        font-size: 13px;
-    }
 }
