@@ -7,7 +7,7 @@
     <title>Regisztráció - VidFlow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;500;700&display=swap" rel="stylesheet"> <!-- Corrected this line -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="registerstyle.css"/>
 </head>
 <body>
@@ -20,7 +20,6 @@
         <input type="password" class="field" id="password" placeholder="Password"><br><br>
         <input type="password" class="field" id="passwordconfirm" placeholder="Confirm Password"><br><br>
         <input type="submit" class="register" value="Register">
-        <h1><?php print "alskfhsdukfh" ?></h1>
     </div>
 </body>
 </html>

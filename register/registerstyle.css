@@ -1,11 +1,10 @@
 body{
-    /* The image used */
-  background-image: url("/vidflow/vidflow_background1.jpg");
-  background-size: cover;  /* This ensures the image covers the entire background */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center;  /* Centers the image */
-    height: 100vh;  /* Sets the height to fill the viewport */
-    margin: 0;  /* Removes default margin */
+    background-image: url("/vidflow/vidflow_background1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .logo{
