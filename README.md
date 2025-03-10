@@ -27,7 +27,7 @@ There are 2 plans that you can choose from.
     - Limited audio quality (max. 128Kbit/s)
     - Limited customization options
   
-- Donation plan
+- Donation plan (300 HUF/Month)
     - Closable ads at the bottom of the video
     - High video resolution support (up to 4K)
     - Better audio quality (up to 256Kbit/s)
