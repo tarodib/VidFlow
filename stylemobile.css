@@ -15,8 +15,10 @@ body{
 
 #officiallogo{
     margin-left: 2.5%;
-    width: 15%;
+    width: 35%;
     height: auto;
+    margin-top: -4px;
+    z-index: -1;
 }
 
 #searchpart {
@@ -137,6 +139,16 @@ body{
     opacity: 80%;
 }
 
+.video-add-to-like-text{
+    margin-top: 15px;
+}
+
+.video-add-to-like2{
+    width: 5%;
+    float: right;
+    opacity: 80;
+}
+
 .video-add-to-playlist{
     width: 15%;
     float: left;
@@ -147,18 +159,8 @@ body{
     cursor: pointer;
 }
 
-.video-add-to-like-text{
-    margin-top: 15px;
-}
-
 .video-add-to-playlist-text{
     margin-top: 15px;
-}
-
-.video-add-to-like2{
-    width: 5%;
-    float: right;
-    opacity: 80;
 }
 
 .video-add-to-playlist2{
@@ -178,19 +180,16 @@ body{
 }
 
 #likedvideosbox{
-    position: fixed;
-    top: 2;
-    left: 0;
-    width: 200px;
-    height: 85%;
+    width: 100%;
+    height: 65vh;
     padding: 10px;
-    margin-top: 25px;
-    margin-left: 5px;
     text-align: center;
     border-image: linear-gradient(to bottom, #BE0606 0%, #7a0202 100%) 1;
     border-width: 4px;
     border-style: solid;
     background-color: #E1B995;
+    display: flex;
+    flex-direction: column;
 }
 
 #likedvideosbox_title {
@@ -199,11 +198,11 @@ body{
     background-color: #E1B995;
     z-index: 10;
     padding-bottom: 10px;
+    flex-shrink: 0;
 }
 
 #likedvideoslist {
     overflow-y: auto;
-    height: 95%;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -219,22 +218,16 @@ body{
 }
 
 #playlistvideosbox{
-    position: fixed;
-    top: 2;
-    right: 0;
-    width: 200px;
-    height: 85%;
-    overflow-y: auto;
+    width: 100%;
+    height: 65vh;
     padding: 10px;
-    margin-top: 25px;
-    margin-right: 5px;
     text-align: center;
     border-image: linear-gradient(to bottom, #BE0606 0%, #7a0202 100%) 1;
     border-width: 4px;
     border-style: solid;
     background-color: #E1B995;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
 }
 
 #playlistvideosbox-body{
@@ -247,11 +240,11 @@ body{
     background-color: #E1B995;
     z-index: 10;
     padding-bottom: 10px;
+    flex-shrink: 0;
 }
 
 #playlistvideoslist {
     overflow-y: auto;
-    height: 95%;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -268,7 +261,7 @@ body{
 
 .video-options {
     position: relative; 
-    display: inline-block; 
+    display: inline-block;
 }
 
 .video-options-content {
@@ -279,6 +272,7 @@ body{
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
     z-index: 1;
     min-width: 160px;
+    margin-left: -100px;
 }
 
 .video-add-to-like-menu {
@@ -364,7 +358,7 @@ body{
 #profilepicupload_box{
     margin: 20px auto 40px auto;
     width: 90%;
-    max-width: 230px;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -504,44 +498,6 @@ body{
     background-color: lightgrey;
 }
 
-#featuredvideosbox{
-    position: fixed;
-    top: 2;
-    right: 0;
-    width: 300px;
-    height: 85%;
-    overflow-y: auto;
-    padding: 10px;
-    margin-top: 40px;
-    margin-right: 20px;
-    text-align: center;
-    border-image: linear-gradient(to bottom, #BE0606 0%, #7a0202 100%) 1;
-    border-width: 4px;
-    border-style: solid;
-    background-color: #E1B995;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-#featuredvideosbox_title {
-    position: sticky;
-    top: 0;
-    background-color: #E1B995;
-    z-index: 10;
-    padding-bottom: 10px;
-}
-
-#featuredvideoslist {
-    overflow-y: auto;
-    height: 95%;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-#featuredvideoslist::-webkit-scrollbar {
-  display: none;
-}
-
 .playlist-delete-icon {
     width: 18px;
     height: 18px;
@@ -631,6 +587,45 @@ body{
     opacity: 1;
 }
 
+#featuredvideosbox{
+    display: none;
+    position: fixed;
+    top: 2;
+    right: 0;
+    width: 300px;
+    height: 85%;
+    overflow-y: auto;
+    padding: 10px;
+    margin-top: 40px;
+    margin-right: 20px;
+    text-align: center;
+    border-image: linear-gradient(to bottom, #BE0606 0%, #7a0202 100%) 1;
+    border-width: 4px;
+    border-style: solid;
+    background-color: #E1B995;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#featuredvideosbox_title {
+    position: sticky;
+    top: 0;
+    background-color: #E1B995;
+    z-index: 10;
+    padding-bottom: 10px;
+}
+
+#featuredvideoslist {
+    overflow-y: auto;
+    height: 95%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#featuredvideoslist::-webkit-scrollbar {
+  display: none;
+}
+
 
 @media only screen and (max-width: 750px) {
     body {
@@ -655,12 +650,15 @@ body{
         height: auto;
         vertical-align: middle;
     }
-
+    
     #officiallogo {
-        margin-left: 2.5%;
+        order: -1;
         width: 35%;
-        height: auto;
-        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        padding-left: 10px;
+        padding-top: 5px;
     }
 
     #searchpart {
@@ -717,14 +715,181 @@ body{
     #logout {
         width: 25px;
         height: auto;
-        border: none;
         margin-top: 0;
         padding-left: 5px;
-        background: none;
         cursor: pointer;
     }
 
     #logouticon {
         width: 25px;
     }
+    
+    #video-container{
+        width: 350px;
+        height: 250px;
+        left: 20px;
+    }
+    
+    .video-player-buttons svg {
+        width: 20px;
+        height: 20px;
+    }
+   
+    .pip-button svg {
+       width: 20px;
+       height: 20px;
+    }
+   
+    .left-controls, .right-controls {
+      gap: 5px;
+    }
+  
+    .volume-controls input.volume {
+      width: 60px;
+      opacity: 1;
+      margin-left: 5px;
+    }
+  
+    #customvideotime{
+      font-size: 12px;
+    }
+  
+    #vidflowiconinplayer{
+      width: 20px;
+    }
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    
+    .headerelements {
+        vertical-align: middle;
+    }
+
+    #officiallogo {
+        width: 18%;
+        margin-left: 2%; 
+    }
+
+    #searchpart {
+        display: inline-block;
+        margin-left: 5%;
+        width: auto;
+        text-align: left;
+        margin-top: 0;
+        flex-basis: auto;
+    }
+
+    #searchbar {
+        width: 450px;
+        height: 40px;
+        margin-top: 1%;
+    }
+
+    #search {
+        height: 42px;
+    }
+
+    #usercontrol {
+        float: right;
+        margin-top: 8px;
+        display: inline-block;
+        width: auto;
+        text-align: right;
+    }
+
+    #userprofilepic {
+        width: 40px;
+        height: auto;
+    }
+
+    #profileusername {
+        font-size: 15px;
+        margin-right: 10px;
+    }
+
+    #logout {
+        width: 30px;
+    }
+
+    #logouticon {
+        width: 30px;
+    }
+
+    #likedvideosbox, #playlistvideosbox {
+        width: 250px;
+    }
+
+    #likedvideosboxopener, #playlistboxopener {
+        margin-right: 2%;
+    }
+    
+    #video-container{
+        width: 370px;
+        height: 270px;
+        left: 20px;
+    }
+    
+    .video-player-buttons svg {
+        width: 22px;
+        height: 22px;
+    }
+   
+    .pip-button svg {
+       width: 22px;
+       height: 22px;
+    }
+   
+    .left-controls, .right-controls {
+      gap: 5px;
+    }
+  
+    .volume-controls input.volume {
+      width: 65px;
+      opacity: 1;
+      margin-left: 5px;
+    }
+  
+    #customvideotime{
+      font-size: 13px;
+    }
+  
+    #vidflowiconinplayer{
+      width: 22px;
+    }
+}
+
+@media only screen 
+  and (min-width: 768px) 
+  and (max-width: 1024px) 
+  and (orientation: landscape) {
+
+    #officiallogo {
+        width: 16%;
+        margin-left: 2%;
+    }
+
+    #searchpart {
+        margin-left: 8%;
+    }
+
+    #searchbar {
+        width: 550px;
+    }
+
+    #likedvideosboxopener, 
+    #playlistboxopener {
+        margin-top: 5px;
+        margin-right: 15px;
+    }
+
+    #usercontrol {
+        margin-right: 30px;
+        margin-top: 8px;
+    }
+    
+     #likedvideosbox, #playlistvideosbox {
+        width: 280px;
+    }
+
+}
+
