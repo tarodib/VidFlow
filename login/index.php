@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
-    <link rel="stylesheet" href="loginstyle.css?ver=1"/>
+
+    <link rel="stylesheet" href="loginstyle.css?ver=1.1"/>
     <title>Bejelentkezés - VidFlow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,8 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
     <link rel="icon" href="../webicon.ico">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="./script.js"></script>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="./script.js?v=1.0"></script>
 
 <?php
 session_start();
@@ -46,10 +48,6 @@ session_start();
         ?>
         </div><br><br>
         <!--THIRD PARTY LOGINS-->
-        <button id="barnatechlogin" onclick="openBarnatechLogin()" style="display: inline-flex; align-items: center; padding: 5px; border: none; background-color: #f0f0f0; cursor: pointer;">
-            <img src="https://barnatech.hu/barnatech_appicon.png" width="30" height="auto" style="margin-right: 5px; border-radius: 5px;" />
-            Belépés BarnaTech.hu fiókkal
-        </button>
         <!--<div id="loginusingbarnatech">
             <form action="login.php" method="post" name="Login_Form">
             <a id="closeloginwithbarnatech" href="" onclick="closeloginwithbarnatechjs()">&times;</a><br><br>
@@ -71,14 +69,31 @@ session_start();
             </table>
             </form>
         </div>-->
-        <br><br>
-        <button id="googlelogin" onclick="openGoogleLogin()" style="display: inline-flex; align-items: center; padding: 5px; border: none; background-color: #f0f0f0; cursor: pointer;">
+        <div id="googlelogin" style="display: inline-flex; align-items: center; padding: 5px; border: none; background-color: #f0f0f0; cursor: pointer;">
             <img src="/pageelements/google_logo.webp" width="30" height="auto" style="margin-right: 5px; border-radius: 5px;" />
             Belépés Google fiókkal
-        </button>
+        </div>
+
+	<div id="g_id_onload" 
+     data-client_id="170029422952-vklbgsc1bt4g4b0od4m1bs26h8hp3a72.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+  // Define the callback function in the global scope
+  function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+
+    // Optionally decode the JWT token to access user information
+    const decodedToken = jwt_decode(response.credential); // Requires `jwt-decode` library
+    console.log("Decoded Token:", decodedToken);
+  }
+</script>
+
     </form>
     </div>
     <a id="registerbutton" onclick="location.href='../register'">Regisztráció</button>
-    <script src="./script.js"></script>
+    
 </body>
+<script src="./script.js?v=1.0"></script>
 </html>
