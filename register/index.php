@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
-    <link rel="stylesheet" href="registerstyle.css?ver=1"/>
+    <link rel="stylesheet" href="registerstyle.css?ver=1.2"/>
     <title>Regisztráció - VidFlow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
     <link rel="icon" href="/webicon.ico">
 </head>
-<body>
+<body onLoad="openModalNow()">
 <?php
 session_start();
+include "captcha.php";
 ?>
     <img src="../vidflow_official_logo.png" alt="" class="logo">
     <form action="register.php" method="post">
@@ -29,7 +30,9 @@ session_start();
         <label for="password">Jelszó:</label><br>
         <input type="password" class="field" id="password" name="password" required><br><br>
         <label for="passwordconfirm">Jelszó megerősítése:</label><br>
-        <input type="password" class="field" id="passwordconfirm" name="passwordconfirm" required><br><br><div id="errors">
+        <input type="password" class="field" id="passwordconfirm" name="passwordconfirm" required><br><br>
+        <label for="securitycheck"><?= $_SESSION["generateCaptchaNumber1"] ?>+<?= $_SESSION["generateCaptchaNumber2"] ?></label><br>
+        <input type="number" class="field" id="captchainput" name="captchainput" required><br><br><div id="errors">
         <!--Hibak ellenorzese a regisztracio folyaman-->
         <?php
         if(isset($_SESSION["error"])){
@@ -45,6 +48,6 @@ session_start();
     </form>
     
     </div>
-    <a id="loginbutton" onclick="location.href='../login'">Bejelentkezés</button>
+    <a id="loginbutton" onclick="location.href='../login'">Bejelentkezés</button></a>
 </body>
 </html>

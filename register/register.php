@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
 require '../vendor/autoload.php';
+include "captcha.php";
 
 session_start();
 //error_reporting(E_ALL);
@@ -17,19 +18,50 @@ $db_password = $_ENV['DB_PASSWORD'];
 $dbname = $_ENV['DB_NAME'];
 $_SESSION["registerinprogress"];
 $_SESSION["profilepic_upload_error"];
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+$securityIPcheckURL = "http://ip-api.com/json/" . get_client_ip() . "?fields=countryCode,hosting";
+$securityIPcheck = file_get_contents($securityIPcheckURL);
+$getSecurityIPJSON = json_decode($securityIPcheck);
+$getSecurityIPCountryCode = $getSecurityIPJSON->countryCode;
+$getSecurityIPHosting = $getSecurityIPJSON->hosting;
 
+if($getSecurityIPCountryCode == "HU" & $getSecurityIPHosting == false){
 if (isset($_POST["register"])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
     $passwordconfirm = $_POST['passwordconfirm'];
+    $captchacode = intval($_POST["captchainput"]);
     $_SESSION["usertoregister"] = $username;
 
     // A jelszo es a jelszo megegyszer osszehasonlitasa
     if ($password !== $passwordconfirm) {
         $_SESSION["error"] .= "<img src='/pageelements/caution_icon.png' width='30' height='auto' alt='Warning!' style='display: inline-block; vertical-align: middle;'/>
         <span style='color: red; font-family: Arial; display: inline-block; vertical-align: middle;'>A jelszavak nem egyeznek!</span><br>";
+        $_SESSION["registerinprogress"] = false;
+        header("Location: index.php");
+        exit();
+    } else if($captchacode !== $_SESSION["rightCaptchaNumber"]) {
+        $_SESSION["error"] .= "<img src='/pageelements/caution_icon.png' width='30' height='auto' alt='Warning!' style='display: inline-block; vertical-align: middle;'/>
+        <span style='color: red; font-family: Arial; display: inline-block; vertical-align: middle;'>A Captcha kód nem megfelelő!</span><br>";
         $_SESSION["registerinprogress"] = false;
         header("Location: index.php");
         exit();
@@ -435,8 +467,12 @@ if (strpos($_SERVER['REQUEST_URI'], "?successful_registration") !== false){
 </body>
 </html>';
 unset($_SESSION["usertoregister"]);
+unset($_SESSION["rightCaptchaNumber"]);
 } else {
     header("Location: /register");
 }
+}
+} else {
+    die("Sorry, but registration is not allowed from your country or possibly illegal activities detected!");
 }
 ?>
