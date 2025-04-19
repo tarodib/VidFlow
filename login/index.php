@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
+
     <link rel="stylesheet" href="loginstyle.css?ver=1.1"/>
     <title>Bejelentkezés - VidFlow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
     <link rel="icon" href="../webicon.ico">
+
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="./script.js?v=1.0"></script>
 
@@ -87,8 +89,6 @@ session_start();
     console.log("Decoded Token:", decodedToken);
   }
 </script>
-
-
 
     </form>
     </div>
