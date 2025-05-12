@@ -1,3 +1,4 @@
+
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
@@ -16,6 +17,7 @@ import org.testng.Assert;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)  // Use per-class instance lifecycle
 public class loginTests {
+
     private WebDriver driver;
     private Map<String, Object> vars;
     private JavascriptExecutor js;
@@ -43,12 +45,12 @@ public class loginTests {
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).sendKeys("test");
         driver.findElement(By.cssSelector(".login")).click();
-        
+
         WebElement usernameDisplayed = driver.findElement(By.id("profileusername"));
         Assert.assertTrue(usernameDisplayed.isDisplayed());
 
     }
-    
+
     @Test
     public void incorrectLoginTest() {
         driver.get("https://vidflow.barnatech.hu/login");
@@ -58,12 +60,12 @@ public class loginTests {
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).sendKeys("testt");
         driver.findElement(By.cssSelector(".login")).click();
-        
+
         WebElement errorMessage = driver.findElement(By.id("errors"));
-        
+
         Assert.assertTrue(errorMessage.isDisplayed());
     }
-    
+
     @Test
     public void logoutTest() {
         driver.get("https://vidflow.barnatech.hu/login/");
@@ -73,9 +75,9 @@ public class loginTests {
         driver.findElement(By.name("password")).sendKeys("test");
         driver.findElement(By.cssSelector(".login")).click();
         driver.findElement(By.id("logouticon")).click();
-        
+
         WebElement loginPageDisplayed = driver.findElement(By.id("login_title"));
-        
+
         Assert.assertTrue(loginPageDisplayed.isDisplayed());
-  }
+    }
 }
